@@ -1,110 +1,199 @@
 # Glyphform
 
-**A real-time ASCII particle animation engine for your terminal.**
+### A particle animation engine for your terminal.
 
-Glyphform uses a lightweight NumPy-based particle simulation to make glowing characters burst apart, move, and reform into four animated silhouettes: a heart, star, shield, and rocket.
+Glyphform is a Python-based terminal animation engine that uses particle physics, spring dynamics, and ANSI rendering to create animated visual forms directly inside your terminal.
+
+Watch particles assemble into shapes, react to mouse interactions, and render custom text in motion.
+
+---
 
 ## Features
 
-- Spring-based particle motion and velocity damping
-- Four built-in vectorized shape masks
-- Animated colour ramps and per-particle flicker
-- Mouse interaction: push particles away or pull and swirl them
-- Keyboard navigation between scenes
-- Incremental ANSI rendering to reduce terminal redraw work
-- Modular package layout with automated tests
+- **Particle Physics:** Spring-based motion, velocity damping, and dynamic particle behaviour.
+- **Interactive Scenes:** Animated heart, star, shield, and rocket.
+- **Custom Text Rendering:** Turn your own text into animated particle formations.
+- **Mouse Interaction:** Push, pull, and swirl particles using mouse input.
+- **Dynamic Colours:** RGB colour ramps, particle flicker, and glow effects.
+- **Terminal Rendering:** Incremental ANSI rendering for real-time visual output.
+- **Modular Architecture:** Separate simulation, rendering, and shape-generation components.
+- **Automated Tests:** Test coverage for core engine functionality.
 
-## Requirements
+## Preview
 
-- Python 3.9 or newer
-- NumPy 1.20 or newer
-- A modern ANSI-compatible terminal
+Demo GIF and screenshots coming soon.
 
-Windows Terminal and the VS Code terminal are recommended on Windows. Most modern macOS and Linux terminals should work.
+---
 
 ## Installation
 
-### Windows
+### Requirements
+
+- Python 3.9+
+- NumPy
+- Pillow
+- An ANSI-compatible terminal
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/alpnoire/Glyphform.git
+cd Glyphform
+```
+
+### 2. Create a virtual environment
+
+**Windows:**
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
 ```
 
-### macOS / Linux
+**macOS / Linux:**
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 python -m pip install -r requirements.txt
 ```
 
-## Run
+---
 
-From the project root:
+## Usage
 
-```bash
-python glyphform.py
-```
-
-Or run it as a package:
+### Launch the animation engine
 
 ```bash
 python -m glyphform
 ```
 
-Maximize the terminal for the best result. Glyphform needs an interactive terminal and will exit with a short message when standard output is not a TTY.
+You can also use:
+
+```bash
+python glyphform.py
+```
+
+### Generate custom particle text
+
+```bash
+python -m glyphform --text "GLYPHFORM"
+```
+
+Replace `GLYPHFORM` with your own text.
+
+For the best experience, maximize your terminal window.
+
+---
 
 ## Controls
 
 | Input | Action |
 |---|---|
-| `N` or `Space` | Next shape |
-| `P` | Previous shape |
-| `Q` or `Ctrl+C` | Quit |
-| Mouse movement | Push particles away from the cursor |
-| Hold left mouse button | Pull and swirl particles around the cursor |
-| Right-click or scroll wheel | Change shape |
+| `N` or `Space` | Next scene |
+| `P` | Previous scene |
+| `Q` or `Ctrl+C` | Exit |
+| Mouse movement | Push particles away |
+| Hold left mouse button | Pull and swirl particles |
+| Right-click or scroll wheel | Change scene |
 
-Mouse input depends on terminal support. Keyboard controls remain available if mouse reporting is unsupported.
+Mouse interaction depends on terminal support.
 
-## Project structure
+---
+
+## Architecture
+
+Glyphform is organised into independent modules.
 
 ```text
-glyphform/
+Glyphform/
+│
 ├── glyphform/
-│   ├── engine/       # Particle world and simulation
-│   ├── rendering/    # ANSI terminal output and input
-│   ├── shapes/       # Shape masks and colour palettes
-│   ├── main.py       # Application loop
-│   └── settings.py   # Runtime constants
-├── tests/            # Automated unit tests
-├── glyphform.py      # Backwards-compatible launcher
-└── requirements.txt
+│   │
+│   ├── engine/
+│   │   └── world.py
+│   │
+│   ├── rendering/
+│   │   └── screen.py
+│   │
+│   ├── shapes/
+│   │   └── text_shape.py
+│   │
+│   ├── main.py
+│   ├── settings.py
+│   └── __main__.py
+│
+├── tests/
+│
+├── glyphform.py
+├── requirements.txt
+├── README.md
+└── LICENSE
 ```
+
+### Core components
+
+| Component | Responsibility |
+|---|---|
+| Engine | Particle simulation and physics |
+| Rendering | Terminal output and input handling |
+| Shapes | Shape masks and custom text generation |
+| Main | Application loop and frame timing |
+| Settings | Runtime configuration |
+
+---
 
 ## Configuration
 
-The initial release keeps the original tuning values in `glyphform/settings.py`:
+Runtime parameters can be adjusted in:
 
-- `FPS`: target frame rate
-- `SCENE_SECONDS`: time each shape remains active
-- `DENSITY`: particle density multiplier
-- `SEED`: set an integer for repeatable random behaviour, or leave as `None`
+`glyphform/settings.py`
 
-## Run the tests
+| Parameter | Description |
+|---|---|
+| `FPS` | Target frame rate |
+| `SCENE_SECONDS` | Duration of each scene |
+| `DENSITY` | Particle density |
+| `SEED` | Random number generator seed |
+
+---
+
+## Running Tests
+
+Install pytest:
 
 ```bash
-python -m unittest discover -s tests -v
+python -m pip install pytest
 ```
 
-## Add a shape
+Run the test suite:
 
-1. Add a vectorized function in `glyphform/shapes/__init__.py`. It receives NumPy coordinate grids `X` and `Y` and returns a boolean mask.
-2. Define a colour palette as ordered `(position, (red, green, blue))` stops.
-3. Add the shape, function, and palette to `SCENES`.
+```bash
+python -m pytest -q
+```
 
-## Notes
+---
 
-Glyphform uses ANSI escape sequences for terminal rendering and mouse reporting. Terminal capabilities vary, so visual output and mouse interaction may differ between terminal applications.
+## Technical Stack
+
+- Python
+- NumPy
+- Pillow
+- ANSI Escape Sequences
+- Terminal-Based Rendering
+- Particle Physics
+
+---
+
+## License
+
+Glyphform is distributed under the MIT License.
+
+---
+
+**Built with Python. Rendered with particles. Powered by imagination.**
