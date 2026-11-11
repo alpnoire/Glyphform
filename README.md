@@ -21,9 +21,7 @@ Watch particles assemble into shapes, react to mouse interactions, and render cu
 
 ## Preview
 
-Demo GIF and screenshots coming soon.
-
----
+![Glyphform Demo](assets/glyphform-demo.gif)
 
 ## Installation
 
