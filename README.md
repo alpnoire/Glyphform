@@ -58,8 +58,7 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-python -m pip install -r requirements.txt
-```
+python -m pip install -r requirements-dev.txt```
 
 ---
 
@@ -74,8 +73,7 @@ python -m glyphform
 You can also use:
 
 ```bash
-python glyphform.py
-```
+python launcher.py```
 
 ### Generate custom particle text
 
@@ -128,7 +126,7 @@ Glyphform/
 │
 ├── tests/
 │
-├── glyphform.py
+├── launcher.py
 ├── requirements.txt
 ├── README.md
 └── LICENSE
